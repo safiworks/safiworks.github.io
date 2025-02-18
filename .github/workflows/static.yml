@@ -36,7 +36,7 @@ jobs:
         with:
           gleam-version: 1.8.1
       - name: Build
-        run:  gleam build
+        run:  gleam run -m lustre/dev build app
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
