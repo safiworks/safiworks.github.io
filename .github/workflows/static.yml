@@ -35,6 +35,7 @@ jobs:
         uses: erlef/setup-beam@v1
         with:
           gleam-version: 1.8.1
+          rebar3-version: 3.24.0
           otp-version: '26'
       - name: Build
         run:  gleam run -m lustre/dev build app
