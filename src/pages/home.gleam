@@ -46,7 +46,7 @@ const projects = [
     "SafaOS",
     "A general purpose operating system written in Rust and Zig.",
     "SafaOS/SafaOS",
-    "priv/static/imgs/SafaOS-small.png",
+    "priv/imgs/SafaOS-small.png",
   ),
 ]
 
