@@ -4,7 +4,7 @@ import gleam/http/request
 import gleam/javascript/promise
 import gleam/json
 
-pub const username = "ObserverUnit"
+pub const username = "safiworks"
 
 pub type UserContext {
   UserContext(full_name: String, username: String, avatar_url: String)
