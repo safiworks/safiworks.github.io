@@ -1,0 +1,44 @@
+---
+import LanguageCard from "../components/LanguageCard.astro";
+const languages_raw: [string, string, string, string][] = [
+    [
+        "Rust",
+        "my go-to programming language.",
+        "https://www.rust-lang.org/logos/rust-logo-128x128-blk.png",
+        "https://www.rust-lang.org/",
+    ],
+    [
+        "Zig",
+        "my second favorite programming language.",
+        "https://raw.githubusercontent.com/ziglang/logo/refs/heads/master/zig-mark.svg",
+        "https://ziglang.org/",
+    ],
+    [
+        "TypeScript",
+        "this website is powered by it!",
+        "https://www.typescriptlang.org/favicon.ico",
+        "https://www.typescriptlang.org/",
+    ],
+];
+---
+
+<div class="language-cards-container">
+    {
+        languages_raw.map((language) => (
+            <LanguageCard
+                language_name={language[0]}
+                language_description={language[1]}
+                language_logo={language[2]}
+                language_website={language[3]}
+            />
+        ))
+    }
+</div>
+
+<style>
+    .language-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>

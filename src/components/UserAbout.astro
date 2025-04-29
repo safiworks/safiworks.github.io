@@ -1,0 +1,27 @@
+---
+import { ctx } from "../context.ts";
+const bio =
+    "I'm a self-taught hobbyist software developer and a high-schooler from Egypt, I'm interested in low-level programming and currently mainly doing osdev, my go-to programming language is Rust.";
+const about = "Hello, I'm " + ctx.full_name + ", " + bio;
+---
+
+<div>
+    <a href={ctx.profile_url}>
+        <img src={ctx.avatar_url} alt={ctx.full_name} />
+    </a>
+    <p>{about}</p>
+</div>
+<style>
+    img {
+        padding-right: 10px;
+        border-radius: 30%;
+        max-width: 13rem;
+    }
+    div {
+        padding-top: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50vw;
+    }
+</style>

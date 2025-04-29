@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UserAbout from "../components/UserAbout.astro";
+import Languages from "../components/Languages.astro";
+import Projects from "../components/Projects.astro";
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+    <UserAbout />
+    <section>
+        <h1>Languages</h1>
+        <p>
+            Programming languages that I currently have public projects written
+            in
+        </p>
+        <Languages />
+    </section>
+    <section>
+        <h1>Projects</h1>
+        <p>
+            My current public projects, sorted by best from left to right and
+            top to bottom
+        </p>
+        <Projects />
+    </section>
+</Layout>
+
+<style>
+    section h1 {
+        padding-top: 1rem;
+        font-size: 2rem;
+    }
+</style>

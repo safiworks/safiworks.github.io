@@ -1,0 +1,32 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+const projects: [string, string, string, boolean?][] = [
+    [
+        "SafaOS/SafaOS",
+        "A cute general-purpose hobby operating system written from scratch.",
+        "/imgs/SafaOS-small.png",
+    ],
+    ["safiworks/Zhip8Emu", "A WIP chip8 emulator.", "/imgs/zhip8emu-small.png"],
+];
+---
+
+<div class="projects-container">
+    {
+        projects.map(([repo, description, image, hasWebsite]) => (
+            <ProjectCard
+                project_repo={repo}
+                project_description={description}
+                project_logo={image}
+                hasWebsite={hasWebsite}
+            />
+        ))
+    }
+</div>
+
+<style>
+    .projects-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>

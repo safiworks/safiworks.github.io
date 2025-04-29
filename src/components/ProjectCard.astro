@@ -1,0 +1,80 @@
+---
+import { extraColor } from "../layouts/Layout.astro";
+const { project_description, project_logo, project_repo, hasWebsite } =
+    Astro.props;
+
+const projectRepo: string = project_repo;
+
+const project_name: string = projectRepo.split("/")[1];
+const project_repo_link = "https://github.com/" + projectRepo;
+
+const project_website_link = hasWebsite ? "/project/" + project_name : "";
+const extraColorWithoutHas = extraColor.slice(1);
+function badge(url: string): string {
+    return `${url}/${project_repo}?style=flat&color=${extraColorWithoutHas}`;
+}
+
+const top_language_badge = badge("https://img.shields.io/github/languages/top");
+const stars_badge = badge("https://img.shields.io/github/stars");
+const license_badge = badge("https://img.shields.io/github/license");
+
+const badges = [top_language_badge, stars_badge, license_badge];
+---
+
+<div class="project-card">
+    <a href={project_repo_link}>
+        <img src={project_logo} class="project-logo" /></a
+    >
+    <a href={project_website_link}
+        ><h2 class="project-name">{project_name}</h2></a
+    >
+    <p class="project-description">{project_description}</p>
+    <div class="project-badges">
+        {
+            badges.map((badge) => (
+                <a href={project_repo_link}>
+                    <img src={badge} class="project-badge" />
+                </a>
+            ))
+        }
+    </div>
+
+    <style>
+        .project-card {
+            padding: 0.5rem;
+            text-align: center;
+            flex-basis: 40%;
+        }
+
+        .project-logo {
+            border-radius: 30%;
+            margin: auto;
+            max-width: 8rem;
+            min-width: 5rem;
+        }
+
+        .project-description {
+            margin: auto;
+            max-width: 10rem;
+        }
+
+        .project-name {
+            margin: auto;
+            padding-bottom: 0.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .project-badges {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+        .project-badge {
+            padding: 3px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</div>

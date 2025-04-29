@@ -1,0 +1,48 @@
+---
+const { language_name, language_description, language_logo, language_website } =
+    Astro.props;
+---
+
+<div class="language-card">
+    <a href={language_website}>
+        <img src={language_logo} class="language-logo" />
+        {
+            language_name !== "" ? (
+                <h2 class="language-name">{language_name}</h2>
+            ) : null
+        }
+        <p class="language-description">{language_description}</p>
+    </a>
+</div>
+
+<style>
+    .language-card {
+        padding: 1rem;
+        text-align: center;
+        flex-basis: 40%;
+    }
+
+    .language-logo {
+        padding: 1rem;
+        border-radius: 30%;
+        margin: auto;
+        max-width: 7rem;
+        min-width: 5rem;
+    }
+
+    .language-description {
+        margin: auto;
+        max-width: 10rem;
+    }
+
+    .language-name {
+        margin: auto;
+        padding: 0.5rem;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
