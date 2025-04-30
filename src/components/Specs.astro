@@ -1,0 +1,50 @@
+---
+// field name, field value, field icon, field link
+const specs = [
+    ["Shell", "fish", "fa-solid fa-terminal", "https://fishshell.com/"],
+    ["OS", "CachyOS", "fa-solid fa-floppy-disk", "https://cachyos.org/"],
+    ["WM", "Hyprland", "fa-solid fa-window-restore", "https://hyprland.org/"],
+    [
+        "Dotfiles",
+        "dotfiles",
+        "fa-brands fa-github",
+        "https://github.com/safiworks/dotfiles",
+    ],
+    ["Code Editor", "Zed", "fa-solid fa-code", "https://zed.dev/"],
+];
+---
+
+<div>
+    {
+        specs.map(([name, value, icon, link]) => (
+            <div class="spec-container">
+                <i class={icon} />
+                <p class="spec-name">{name}:</p>
+                <a href={link}>
+                    <p class="spec-value">{value}</p>
+                </a>
+            </div>
+        ))
+    }
+</div>
+
+<style>
+    .spec-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    i {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 5px;
+    }
+    .spec-name {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-weight: bold;
+    }
+    a {
+        color: inherit;
+    }
+</style>
