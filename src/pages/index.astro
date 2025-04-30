@@ -2,11 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import UserAbout from "../components/UserAbout.astro";
 import Languages from "../components/Languages.astro";
-import Projects from "../components/Projects.astro";
+import Projects, { type ProjectsT } from "../components/Projects.astro";
 import Socials from "../components/Socials.astro";
 import Specs from "../components/Specs.astro";
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const projects: ProjectsT = [
+    [
+        "SafaOS/SafaOS",
+        "A cute general-purpose hobby operating system written from scratch.",
+        "/imgs/SafaOS-small.png",
+    ],
+    ["safiworks/Zhip8Emu", "A WIP chip8 emulator.", "/imgs/zhip8emu-small.png"],
+];
+
+const nootable_projects: ProjectsT = [
+    [
+        "safiworks/CrabLauncher",
+        "A minecraft launcher written in Rust.",
+        "https://rustacean.net/assets/rustacean-flat-happy.svg",
+        ["top_language", "stars"],
+    ],
+];
 ---
 
 <Layout>
@@ -25,7 +41,12 @@ import Specs from "../components/Specs.astro";
             My current public projects, sorted by best from left to right and
             top to bottom
         </p>
-        <Projects />
+        <Projects projects={projects} />
+    </section>
+    <section>
+        <h1>Notable Projects</h1>
+        <p>My projects that's development was paused, archived or abandoned.</p>
+        <Projects projects={nootable_projects} />
     </section>
     <section>
         <h1>Specs</h1>

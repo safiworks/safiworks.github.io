@@ -1,14 +1,30 @@
 ---
 import { extraColor } from "../layouts/Layout.astro";
-const { project_description, project_logo, project_repo, hasWebsite } =
-    Astro.props;
 
-const projectRepo: string = project_repo;
+export type Badge = "stars" | "license" | "top_language";
 
-const project_name: string = projectRepo.split("/")[1];
-const project_repo_link = "https://github.com/" + projectRepo;
+const {
+    project_description,
+    project_logo,
+    project_repo,
+    hasWebsite,
+    project_badges,
+} = Astro.props as {
+    project_description: string;
+    project_logo: string;
+    project_repo: string;
+    project_badges: Badge[] | undefined;
+    hasWebsite: boolean | undefined;
+};
 
-const project_website_link = hasWebsite ? "/project/" + project_name : "";
+const badges = project_badges || ["top_language", "stars", "license"];
+
+const project_name: string = project_repo.split("/")[1];
+const project_repo_link = "https://github.com/" + project_repo;
+
+const project_website_link = hasWebsite
+    ? "/project/" + project_name
+    : project_repo_link;
 const extraColorWithoutHas = extraColor.slice(1);
 function badge(url: string): string {
     return `${url}/${project_repo}?style=flat&color=${extraColorWithoutHas}`;
@@ -18,7 +34,16 @@ const top_language_badge = badge("https://img.shields.io/github/languages/top");
 const stars_badge = badge("https://img.shields.io/github/stars");
 const license_badge = badge("https://img.shields.io/github/license");
 
-const badges = [top_language_badge, stars_badge, license_badge];
+const badges_parsed: string[] = badges.map((badge) => {
+    switch (badge) {
+        case "stars":
+            return stars_badge;
+        case "license":
+            return license_badge;
+        case "top_language":
+            return top_language_badge;
+    }
+});
 ---
 
 <div class="project-card">
@@ -31,7 +56,7 @@ const badges = [top_language_badge, stars_badge, license_badge];
     <p class="project-description">{project_description}</p>
     <div class="project-badges">
         {
-            badges.map((badge) => (
+            badges_parsed.map((badge) => (
                 <a href={project_repo_link}>
                     <img src={badge} class="project-badge" />
                 </a>

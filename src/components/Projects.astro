@@ -1,22 +1,20 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
-const projects: [string, string, string, boolean?][] = [
-    [
-        "SafaOS/SafaOS",
-        "A cute general-purpose hobby operating system written from scratch.",
-        "/imgs/SafaOS-small.png",
-    ],
-    ["safiworks/Zhip8Emu", "A WIP chip8 emulator.", "/imgs/zhip8emu-small.png"],
-];
+import ProjectCard, { type Badge } from "./ProjectCard.astro";
+export type ProjectsT = [string, string, string, Badge[]?, boolean?][];
+
+const { projects } = Astro.props as {
+    projects: ProjectsT;
+};
 ---
 
 <div class="projects-container">
     {
-        projects.map(([repo, description, image, hasWebsite]) => (
+        projects.map(([repo, description, image, badges, hasWebsite]) => (
             <ProjectCard
                 project_repo={repo}
                 project_description={description}
                 project_logo={image}
+                project_badges={badges}
                 hasWebsite={hasWebsite}
             />
         ))
