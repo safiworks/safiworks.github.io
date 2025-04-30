@@ -1,0 +1,51 @@
+---
+// [icon, name, url, optional user url]
+const socials: [string, string, string, string?][] = [
+    [
+        "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png",
+        "safiworks",
+        "https://github.com/",
+        "https://github.com/safiworks",
+    ],
+    [
+        "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d80db9971f10a9757c99_Symbol.svg",
+        "@safiworks",
+        "https://discord.com/",
+    ],
+];
+---
+
+<div class="social-icons">
+    {
+        socials.map(([icon, name, url, userUrl]) => (
+            <a href={userUrl || url} target="_blank" rel="noopener noreferrer">
+                <div class="social-icon-container">
+                    <img src={icon} alt={name} class="social-icon" />
+                    <p>{name}</p>
+                </div>
+            </a>
+        ))
+    }
+</div>
+
+<style>
+    .social-icon {
+        max-width: 32px;
+        max-height: 32px;
+        border-radius: 30px;
+        padding: 8px;
+    }
+    .social-icons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .social-icon-container {
+        display: flex;
+        align-items: center;
+    }
+    a {
+        color: inherit;
+    }
+</style>
