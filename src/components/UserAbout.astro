@@ -7,19 +7,28 @@ const about = "Hello, I'm " + ctx.full_name + ", " + bio;
 
 <div>
     <a href={ctx.profile_url}>
-        <img src={ctx.avatar_url} alt={ctx.full_name} />
+        <img
+            src={ctx.avatar_url}
+            alt={ctx.full_name}
+            class="user-about-avatar"
+        />
     </a>
-    <p>{about}</p>
+    <p class="user-about-text">{about}</p>
 </div>
 <style>
-    img {
+    .user-about-avatar {
         padding-right: 10px;
         border-radius: 30%;
         max-width: 13rem;
     }
+    .user-about-text {
+        flex-basis: 55%;
+        flex-grow: 3;
+    }
     div {
         padding-top: 4rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         width: 50vw;
