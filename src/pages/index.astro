@@ -23,6 +23,19 @@ const nootable_projects: ProjectsT = [
         ["top_language", "stars"],
     ],
 ];
+
+const specs = [
+    ["Shell", "fish", "fa-solid fa-terminal", "https://fishshell.com/"],
+    ["OS", "CachyOS", "fa-solid fa-floppy-disk", "https://cachyos.org/"],
+    ["WM", "Hyprland", "fa-solid fa-window-restore", "https://hyprland.org/"],
+    [
+        "Dotfiles",
+        "dotfiles",
+        "fa-brands fa-github",
+        "https://github.com/safiworks/dotfiles",
+    ],
+    ["Code Editor", "Zed", "fa-solid fa-code", "https://zed.dev/"],
+];
 ---
 
 <Layout>
@@ -50,7 +63,7 @@ const nootable_projects: ProjectsT = [
     </section>
     <section>
         <h1>Specs</h1>
-        <Specs />
+        <Specs specs={specs} />
     </section>
     <section>
         <h1>Socials</h1>

@@ -1,0 +1,40 @@
+---
+const { screenshots } = Astro.props as {
+    screenshots: [string, string][];
+};
+---
+
+<div class="screenshots-container">
+    {
+        screenshots.map(([screenshot_name, screenshot_url]) => (
+            <div class="screenshot-container">
+                <a href={screenshot_url}>
+                    <img
+                        src={screenshot_url}
+                        class="screenshot"
+                        alt={screenshot_url}
+                    />
+                </a>
+                <p2>{screenshot_name}</p2>
+            </div>
+        ))
+    }
+</div>
+
+<style>
+    .screenshots-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .screenshot-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .screenshot {
+        max-width: 15rem;
+        padding-bottom: 1rem;
+    }
+</style>

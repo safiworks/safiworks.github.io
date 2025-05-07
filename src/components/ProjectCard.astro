@@ -1,8 +1,6 @@
 ---
-import { extraColor } from "../layouts/Layout.astro";
-
-export type Badge = "stars" | "license" | "top_language";
-
+import { stars_badge, license_badge, top_language_badge } from "../utils.astro";
+import { type Badge } from "../utils.astro";
 const {
     project_description,
     project_logo,
@@ -25,25 +23,19 @@ const project_repo_link = "https://github.com/" + project_repo;
 const project_website_link = hasWebsite
     ? "/project/" + project_name
     : project_repo_link;
-const extraColorWithoutHas = extraColor.slice(1);
-function badge(url: string): string {
-    return `${url}/${project_repo}?style=flat&color=${extraColorWithoutHas}`;
-}
 
-const top_language_badge = badge("https://img.shields.io/github/languages/top");
-const stars_badge = badge("https://img.shields.io/github/stars");
-const license_badge = badge("https://img.shields.io/github/license");
-
-const badges_parsed: string[] = badges.map((badge) => {
-    switch (badge) {
-        case "stars":
-            return stars_badge;
-        case "license":
-            return license_badge;
-        case "top_language":
-            return top_language_badge;
-    }
-});
+const badges_parsed: string[] = badges
+    .map((badge) => {
+        switch (badge) {
+            case "stars":
+                return stars_badge;
+            case "license":
+                return license_badge;
+            case "top_language":
+                return top_language_badge;
+        }
+    })
+    .map((f) => f(project_repo));
 ---
 
 <div class="project-card">

@@ -1,0 +1,19 @@
+---
+import { extraColor } from "./layouts/Layout.astro";
+export type Badge = "stars" | "license" | "top_language";
+
+export function badge(url: string, repo: string): string {
+    const extraColorWithoutHas = extraColor.slice(1);
+    return `${url}/${repo}?style=flat&color=${extraColorWithoutHas}`;
+}
+
+export function top_language_badge(repo: string): string {
+    return badge("https://img.shields.io/github/languages/top", repo);
+}
+
+export function stars_badge(repo: string): string {
+    return badge("https://img.shields.io/github/stars", repo);
+}
+export const license_badge = (repo: string) =>
+    badge("https://img.shields.io/github/license", repo);
+---

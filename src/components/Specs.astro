@@ -1,17 +1,8 @@
 ---
 // field name, field value, field icon, field link
-const specs = [
-    ["Shell", "fish", "fa-solid fa-terminal", "https://fishshell.com/"],
-    ["OS", "CachyOS", "fa-solid fa-floppy-disk", "https://cachyos.org/"],
-    ["WM", "Hyprland", "fa-solid fa-window-restore", "https://hyprland.org/"],
-    [
-        "Dotfiles",
-        "dotfiles",
-        "fa-brands fa-github",
-        "https://github.com/safiworks/dotfiles",
-    ],
-    ["Code Editor", "Zed", "fa-solid fa-code", "https://zed.dev/"],
-];
+const { specs } = Astro.props as {
+    specs: [string, string, string, string][];
+};
 ---
 
 <div>

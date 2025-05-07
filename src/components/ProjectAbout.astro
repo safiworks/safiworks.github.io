@@ -1,0 +1,56 @@
+---
+import { license_badge, stars_badge, top_language_badge } from "../utils.astro";
+
+const { name, repo, img_url, description } = Astro.props as {
+    name: string;
+    repo: string;
+    img_url: string;
+    description: string;
+};
+
+const url = "https://github.com/" + repo;
+const stars = stars_badge(repo);
+const license = license_badge(repo);
+const top_language = top_language_badge(repo);
+const badges = [stars, license, top_language];
+---
+
+<div>
+    <a href={url}>
+        <img src={img_url} alt={name} class="project-about-icon" />
+    </a>
+    <h2>{name}</h2>
+    <p class="project-about-text">{description}</p>
+    <div class="project-badges">
+        {
+            badges.map((badge) => (
+                <a href={url}>
+                    <img src={badge} class="project-badge" />
+                </a>
+            ))
+        }
+    </div>
+</div>
+<style>
+    .project-about-icon {
+        border-radius: 30%;
+        max-width: 15rem;
+    }
+    .project-about-text {
+        max-width: 20rem;
+    }
+    .project-badges {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+    }
+    .project-badge {
+        padding: 3px;
+    }
+    div {
+        padding-top: 4rem;
+        justify-content: center;
+        align-items: center;
+        width: 50vw;
+    }
+</style>

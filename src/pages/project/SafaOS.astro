@@ -1,0 +1,61 @@
+---
+import ProjectAbout from "../../components/ProjectAbout.astro";
+import Screenshots from "../../components/Screenshots.astro";
+import Specs from "../../components/Specs.astro";
+import Layout from "../../layouts/Layout.astro";
+const screenshots = [
+    ["latest", "/imgs/screenshots/SafaOS070525.png"],
+    [
+        "running on real-hardware",
+        "/imgs/screenshots/SafaOS-running-on-realhardware.png",
+    ],
+];
+
+const specs = [
+    [
+        "libstd",
+        "rust's standard library",
+        "fa-brands fa-rust",
+        "https://github.com/SafaOS/rust/tree/stable",
+    ],
+    [
+        "lua",
+        "lua's interpreter",
+        "fa-solid fa-square-binary",
+        "https://github.com/safiworks/SafaOS-lua",
+    ],
+    [
+        "libc",
+        "a libc written in zig",
+        "fa-brands fa-c",
+        "https://github.com/SafaOS/libc",
+    ],
+];
+---
+
+<Layout>
+    <ProjectAbout
+        name="SafaOS"
+        description="A cute hobby general-puropse open-source non-unix-like Operating System, written in rust."
+        img_url="/imgs/SafaOS-small.png"
+        repo="SafaOS/SafaOS"
+    />
+    <section>
+        <h1>Screenshots</h1>
+        <Screenshots screenshots={screenshots} />
+    </section>
+    <section>
+        <h1>Ports</h1>
+        <p>Awesome stuff that was ported to SafaOS</p>
+        <Specs specs={specs} />
+    </section>
+</Layout>
+
+<style>
+    h1 {
+        font-size: 2rem;
+    }
+    section h1 {
+        padding-top: 1rem;
+    }
+</style>
