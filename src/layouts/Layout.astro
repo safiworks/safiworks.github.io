@@ -2,9 +2,51 @@
 export const bgColor = "#2C3930";
 export const textColor = "#DCD7C9";
 export const extraColor = "#A27B5C";
+
+const { title } = Astro.props as {
+    title: string;
+};
 ---
 
-<!doctype html>
+<script>
+    // Script to add the copy code button
+
+    async function copyCode(block: HTMLPreElement, button: HTMLButtonElement) {
+        let code = block.querySelector("code")!;
+        let text = code.innerText;
+
+        await navigator.clipboard.writeText(text);
+
+        // visual feedback that task is completed
+        button.innerText = "Copied";
+
+        setTimeout(() => {
+            button.innerText = copyButtonLabel;
+        }, 700);
+    }
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+        let wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
+        let copyButton = document.createElement("button");
+        copyButton.className = "copy-code-btn";
+        copyButton.innerHTML = copyButtonLabel;
+
+        // allow interacting using the tab button
+        codeBlock.setAttribute("tabindex", "0");
+        codeBlock.appendChild(copyButton);
+
+        codeBlock.parentNode?.insertBefore(wrapper, codeBlock);
+        wrapper.appendChild(codeBlock);
+
+        copyButton.addEventListener("click", async () => {
+            await copyCode(codeBlock, copyButton);
+        });
+    }
+</script>
+
 <html lang="en">
     <head>
         <link
@@ -15,20 +57,58 @@ export const extraColor = "#A27B5C";
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>Safi</title>
+        <title>{title}</title>
     </head>
     <body>
-        <center><slot /></center>
+        <slot />
     </body>
 </html>
 
-<style define:vars={{ bgColor, textColor }}>
+<style define:vars={{ bgColor, textColor, extraColor }} is:global>
     html,
     body {
         background-color: var(--bgColor);
         color: var(--textColor);
-        font-family: sans-serif;
+        font-family: system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
         max-width: 100vw;
         max-height: 100vh;
+    }
+
+    a:hover {
+        color: lightyellow;
+        text-decoration: underline;
+    }
+    a {
+        color: lightgreen;
+        text-decoration: none;
+    }
+    .astro-code {
+        border-radius: 5px;
+        align-content: center;
+        min-height: 5rem;
+        padding: 2rem;
+    }
+    .astro-code code {
+        font-size: 1em;
+        tab-size: 4;
+    }
+
+    .copy-code-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        color: lightgreen;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        border: none;
+    }
+
+    .copy-code-btn:hover {
+        color: lightyellow;
+        text-decoration: underline;
     }
 </style>

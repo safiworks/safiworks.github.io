@@ -1,5 +1,34 @@
 ---
 import { extraColor } from "./layouts/Layout.astro";
+import type { MarkdownHeading } from "astro";
+
+export type BlogPost = {
+    uri: string;
+    title: string;
+    date: string;
+
+    getHeadings: () => MarkdownHeading[];
+    getContent: () => string;
+};
+
+export const blog_posts: BlogPost[] = Object.values(
+    import.meta.glob("./blog/*.md", { eager: true }),
+).map((val: any, _index, _arr) => {
+    const front = val.frontmatter;
+
+    return {
+        uri: front.uri,
+        title: front.title,
+        date: front.date,
+        getHeadings: val.getHeadings,
+        getContent: val.compiledContent,
+    };
+});
+
+export const blog_posts_map: Map<string, BlogPost> = new Map(
+    blog_posts.map((post, _i, _a) => [post.uri, post]),
+);
+
 export type Badge = "stars" | "license" | "top_language";
 
 export function badge(url: string, repo: string): string {

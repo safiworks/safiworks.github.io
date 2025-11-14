@@ -5,6 +5,7 @@ import Languages from "../components/Languages.astro";
 import Projects, { type ProjectsT } from "../components/Projects.astro";
 import Socials from "../components/Socials.astro";
 import Specs from "../components/Specs.astro";
+import HomeLayout from "../layouts/HomeLayout.astro";
 
 const projects: ProjectsT = [
     [
@@ -43,7 +44,7 @@ const specs = [
 ];
 ---
 
-<Layout>
+<HomeLayout>
     <UserAbout />
     <section>
         <h1>Languages</h1>
@@ -75,7 +76,7 @@ const specs = [
         <p>My socials & methods to contact me</p>
         <Socials />
     </section>
-</Layout>
+</HomeLayout>
 
 <style>
     section h1 {

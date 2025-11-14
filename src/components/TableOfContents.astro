@@ -1,0 +1,29 @@
+---
+import type { MarkdownHeading } from "astro";
+export interface Props {
+    node: {
+        md: MarkdownHeading;
+        children: Props["node"][];
+    };
+}
+
+const { node } = Astro.props;
+---
+
+<li>
+    <a href={`#${node.md.slug}`}>{node.md.text}</a>
+    {
+        node.children.length > 0 && (
+            <ul>
+                {node.children.map((child) => (
+                    <Astro.self node={child} />
+                ))}
+            </ul>
+        )
+    }
+</li>
+
+<style>
+    a {
+    }
+</style>

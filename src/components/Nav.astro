@@ -1,0 +1,47 @@
+---
+import { ctx } from "../context.ts";
+const bio = "A self-taught hobbyist software developer.";
+const about = "Hello, I'm " + ctx.full_name + "! " + bio;
+---
+
+<div class="all-of-it">
+    <a href={ctx.profile_url}>
+        <img
+            src={ctx.avatar_url}
+            alt={ctx.full_name}
+            class="user-about-avatar"
+        />
+    </a>
+    <div class="buttons">
+        <a href="/">home</a>
+        <a href="/blog">blogs</a>
+    </div>
+    <p class="user-about-text">{about}</p>
+</div>
+<style>
+    .user-about-avatar {
+        padding-right: 10px;
+        padding-bottom: 1rem;
+        border-radius: 30%;
+        max-width: 5rem;
+    }
+    .user-about-text {
+        flex-basis: 55%;
+        flex-grow: 3;
+    }
+    .all-of-it {
+        padding: 1rem;
+        align-items: center;
+        text-align: center;
+        max-width: 6rem;
+    }
+    .buttons a {
+        font-size: 1.1rem;
+        text-decoration: underline;
+        color: lightgreen;
+        line-height: 2rem;
+    }
+    .buttons a:hover {
+        color: lightyellow;
+    }
+</style>

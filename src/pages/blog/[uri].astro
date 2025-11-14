@@ -1,0 +1,135 @@
+---
+import type { GetStaticPaths, MarkdownHeading } from "astro";
+import { blog_posts_map, type BlogPost } from "../../utils.astro";
+import Layout from "../../layouts/Layout.astro";
+import CenterContainer from "../../components/CenterContainer.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import Nav from "../../components/Nav.astro";
+
+export const getStaticPaths = (() => {
+    return blog_posts_map
+        .keys()
+        .map((uri) => {
+            return {
+                params: {
+                    uri,
+                },
+            };
+        })
+        .toArray();
+}) satisfies GetStaticPaths;
+
+const { uri } = Astro.params;
+const post: BlogPost = blog_posts_map.get(uri)!;
+
+type Headings = {
+    md: MarkdownHeading;
+    children: Headings[];
+    prev: Headings | null;
+};
+
+let root: Headings = {
+    md: {
+        text: "",
+        depth: 1,
+        slug: "",
+    },
+    children: [],
+    prev: null,
+};
+
+let current = root;
+
+let current_depth = 1;
+
+for (const h of post.getHeadings()) {
+    let self = {
+        md: h,
+        children: [],
+        prev: current,
+    };
+
+    while (h.depth < current_depth) {
+        const prev = current.prev;
+        if (prev != null) {
+            current = prev;
+            current_depth -= 1;
+        } else {
+            break;
+        }
+    }
+
+    while (h.depth > current_depth) {
+        const last_child = current.children.at(-1);
+        if (last_child != null) {
+            current = last_child;
+            current_depth += 1;
+        } else {
+            break;
+        }
+    }
+
+    current.children.push(self);
+    current_depth = h.depth;
+}
+
+let headings = root.children;
+---
+
+<Layout title={post.title}>
+    <div class="all-of-it">
+        <div class="nav">
+            <Nav />
+        </div>
+        <div class="container">
+            <CenterContainer>
+                <h1>{post.title}</h1>
+                <ul>
+                    {headings.map((h) => <TableOfContents node={h} />)}
+                </ul>
+                <div set:html={post.getContent()} />
+                <div class="blog-footer">
+                    <p>Have any questions? feel free to contact me at:</p>
+                    <ul>
+                        <li>
+                            my discord:
+                            <a
+                                class="contact-link"
+                                href="https://discord.com/users/safiworks"
+                                >@safiworks<a></a>
+                            </a>
+                        </li>
+                        <li>
+                            my email:
+                            <a
+                                class="contact-link"
+                                href="mailto:safiworks0@gmail.com"
+                                >safiworks0@gmail.com</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </CenterContainer>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .blog-footer {
+        margin-top: 3rem;
+        border-top: 1px solid wheat;
+        font-style: italic;
+    }
+    .contact-link {
+        text-decoration: underline;
+        font-style: normal;
+        font-weight: bold;
+    }
+    .all-of-it {
+        display: flex;
+        flex-direction: row;
+    }
+    .container {
+        flex-basis: 83%;
+    }
+</style>

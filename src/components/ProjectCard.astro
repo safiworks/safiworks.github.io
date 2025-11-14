@@ -1,4 +1,5 @@
 ---
+import { textColor } from "../layouts/Layout.astro";
 import { stars_badge, license_badge, top_language_badge } from "../utils.astro";
 import { type Badge } from "../utils.astro";
 const {
@@ -56,7 +57,7 @@ const badges_parsed: string[] = badges
         }
     </div>
 
-    <style>
+    <style define:vars={{ textColor }}>
         .project-card {
             padding: 0.5rem;
             text-align: center;
@@ -90,7 +91,7 @@ const badges_parsed: string[] = badges
         }
         a {
             text-decoration: none;
-            color: inherit;
+            color: var(--textColor);
         }
     </style>
 </div>
