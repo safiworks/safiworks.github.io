@@ -1,10 +1,9 @@
 ---
 import type { GetStaticPaths, MarkdownHeading } from "astro";
 import { blog_posts_map, type BlogPost } from "../../utils.astro";
-import Layout from "../../layouts/Layout.astro";
-import CenterContainer from "../../components/CenterContainer.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
-import Nav from "../../components/Nav.astro";
+import ContactFooter from "../../components/ContactFooter.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 
 export const getStaticPaths = (() => {
     return blog_posts_map
@@ -76,56 +75,11 @@ for (const h of post.getHeadings()) {
 let headings = root.children;
 ---
 
-<Layout title={post.title}>
-    <div class="all-of-it">
-        <div class="nav">
-            <Nav />
-        </div>
-        <div class="container">
-            <CenterContainer>
-                <h1>{post.title}</h1>
-                <ul>
-                    {headings.map((h) => <TableOfContents node={h} />)}
-                </ul>
-                <div set:html={post.getContent()} />
-                <div class="blog-footer">
-                    <p>Have any questions? feel free to contact me at:</p>
-                    <ul>
-                        <li>
-                            my discord:
-                            <a
-                                class="contact-link"
-                                href="https://discord.com/users/safiworks"
-                                >@safiworks<a></a>
-                            </a>
-                        </li>
-                        <li>
-                            my email:
-                            <a
-                                class="contact-link"
-                                href="mailto:safiworks0@gmail.com"
-                                >safiworks0@gmail.com</a
-                            >
-                        </li>
-                    </ul>
-                </div>
-            </CenterContainer>
-        </div>
-    </div>
-</Layout>
-
-<style>
-    .blog-footer {
-        margin-top: 3rem;
-        border-top: 1px solid wheat;
-        font-style: italic;
-    }
-    .contact-link {
-        text-decoration: underline;
-        font-style: normal;
-        font-weight: bold;
-    }
-    .container {
-        flex-basis: 83%;
-    }
-</style>
+<PageLayout title={post.title}>
+    <h1>{post.title}</h1>
+    <ul>
+        {headings.map((h) => <TableOfContents node={h} />)}
+    </ul>
+    <div set:html={post.getContent()} />
+    <ContactFooter />
+</PageLayout>

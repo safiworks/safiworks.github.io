@@ -1,0 +1,16 @@
+---
+import CenterContainer from "../components/CenterContainer.astro";
+import Nav from "../components/Nav.astro";
+import Layout from "./Layout.astro";
+
+const { title } = Astro.props as {
+    title: string;
+};
+---
+
+<Layout title={title}>
+    <Nav />
+    <CenterContainer>
+        <slot />
+    </CenterContainer>
+</Layout>

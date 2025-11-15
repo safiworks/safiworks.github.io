@@ -2,7 +2,7 @@
 title: "First Blog Post, Why?"
 uri: "first-blog-post"
 date: "2025-11-13"
-project: null
+description: "A little website test blog post."
 ---
 
 Hello! This is my first ever blog post!

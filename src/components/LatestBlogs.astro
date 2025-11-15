@@ -1,0 +1,32 @@
+---
+import { blogPosts, getBlogPostUri } from "../utils.astro";
+
+const latest_posts = blogPosts.slice(0, 3);
+---
+
+<div>
+    <ul>
+        {
+            latest_posts.map((post) => (
+                <li>
+                    <a href={getBlogPostUri(post)}>{post.title}</a>
+                </li>
+            ))
+        }
+        <li>
+            <a href={"/blog"}>See More...</a>
+        </li>
+    </ul>
+</div>
+
+<style>
+    li {
+        max-width: 20rem;
+    }
+    div {
+        display: flex;
+        text-align: left;
+        justify-content: center;
+        max-width: 20rem;
+    }
+</style>

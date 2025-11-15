@@ -1,0 +1,72 @@
+---
+import ContactFooter from "../components/ContactFooter.astro";
+import Layout from "../layouts/Layout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import { blogPosts, getBlogPostUri } from "../utils.astro";
+
+function formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, "0");
+    const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+
+    var prefix = "";
+    if (day.endsWith("1") && day !== "11") {
+        prefix = "st";
+    } else if (day.endsWith("2") && day !== "12") {
+        prefix = "nd";
+    } else if (day.endsWith("3") && day !== "13") {
+        prefix = "rd";
+    } else {
+        prefix = "th";
+    }
+    return `${day}${prefix} of ${month} ${year}`;
+}
+---
+
+<PageLayout>
+    <h1>Blogs</h1>
+    <div class="blog-posts">
+        {
+            blogPosts.map((post) => (
+                <article class="blog-post">
+                    <a href={getBlogPostUri(post)}>
+                        <h2>{post.title}</h2>
+                    </a>
+                    <p>{post.description}</p>
+                    <p class="post-footer">{`${formatDate(post.date)} ${post.project ? `| ${post.project}` : ""}`}</p>
+                </article>
+            ))
+        }
+    </div>
+</PageLayout>
+
+<style>
+    .blog-post {
+        border-bottom: 1px solid wheat;
+        margin-bottom: 4rem;
+    }
+    .blog-post p {
+        max-width: 35rem;
+    }
+    .post-footer {
+        font-size: 0.8em;
+        color: #666;
+    }
+    .blog-posts {
+        margin-top: 30px;
+    }
+</style>

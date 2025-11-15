@@ -6,6 +6,7 @@ import Projects, { type ProjectsT } from "../components/Projects.astro";
 import Socials from "../components/Socials.astro";
 import Specs from "../components/Specs.astro";
 import HomeLayout from "../layouts/HomeLayout.astro";
+import LatestBlogs from "../components/LatestBlogs.astro";
 
 const projects: ProjectsT = [
     [
@@ -46,6 +47,10 @@ const specs = [
 
 <HomeLayout>
     <UserAbout />
+    <section class="latest-blogs">
+        <h1>Latest Blogs</h1>
+        <LatestBlogs />
+    </section>
     <section>
         <h1>Languages</h1>
         <p>
@@ -82,5 +87,8 @@ const specs = [
     section h1 {
         padding-top: 1rem;
         font-size: 2rem;
+    }
+    .latest-blogs {
+        max-width: 13rem;
     }
 </style>
