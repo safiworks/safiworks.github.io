@@ -17,9 +17,12 @@ const about = "Hello, I'm " + ctx.full_name + ", " + bio;
 </div>
 <style>
     .user-about-avatar {
-        padding-right: 30px;
+        padding-right: 10px;
         border-radius: 68px;
-        max-width: 10rem;
+        width: 10rem;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
     }
     .user-about-text {
         flex-basis: 55%;
