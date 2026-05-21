@@ -196,7 +196,7 @@ This is a property that just indicates the node is an interrupt controller.
 
 ### interrupt-parent
 - A `phandle` reference to the interrupt controller node that this node will use to generate interrupts.
-- If not present, the interrupt controller node is assumed to be the parent node.
+- If not present, it would be inherited from the parent node.
 
 ### \#interrupt-cells
 - In an interrupt controller node, this property defines the number of cells an interrupt specifier takes.
